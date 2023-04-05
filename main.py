@@ -13,11 +13,11 @@
 #             temperatures.append(int(row[1]))
 #     print(temperatures)
 
-"""imported pandas module"""
-import pandas
-
-"""using pandas module to read a csv file"""
-data = pandas.read_csv("weather_data.csv")
+# """imported pandas module"""
+# import pandas
+#
+# """using pandas module to read a csv file"""
+# data = pandas.read_csv("weather_data.csv")
 # print(data["temp"])
 
 # """converting the data to dictionary format"""
@@ -74,7 +74,34 @@ data = pandas.read_csv("weather_data.csv")
 # data2 = pandas.DataFrame(dataDict)
 # print(data2)
 #
-# """converting the obtaines data to csv format"""
+# """converting the obtained data to csv format"""
 # print(
 #     data2.to_csv()
 # )
+
+#####
+
+# """the great squirrel census data analysis"""
+# """imported pandas module"""
+# import pandas
+#
+# """using pandas to read the data and store it in a variable"""
+# data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+#
+# """getting the rows"""
+# Gray = data[data["Primary Fur Color"] == "Gray"]
+# Red = data[data["Primary Fur Color"] == "Cinnamon"]
+# Black = data[data["Primary Fur Color"] == "Black"]
+#
+# """getting the length of all the required colors"""
+# numGray = len(Gray)
+# numRed = len(Red)
+# numBlack = len(Black)
+#
+# dataDict = {
+#     "Fur color": ["Gray", "Red", "Black"],
+#     "Count": [numGray, numRed, numBlack],
+# }
+#
+# newSquirrelData = pandas.DataFrame(dataDict)
+# newSquirrelData.to_csv("squirrelsCount.csv", index = False)
