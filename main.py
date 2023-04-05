@@ -105,3 +105,35 @@
 #
 # newSquirrelData = pandas.DataFrame(dataDict)
 # newSquirrelData.to_csv("squirrelsCount.csv", index = False)
+
+#####
+
+"""India's states game"""
+import turtle
+
+"""imported Screen class from the turtle module"""
+from turtle import Screen
+
+"""image"""
+image = "Indian_Political_Map_March_2022.gif"
+
+"""created screen object"""
+screen = Screen()
+screen.title("India's states game")
+screen.setup(width=800, height=800)
+screen.addshape(image)
+
+"""turtle takes the shape of the image"""
+turtle.shape(image)
+
+# """function to find the coordinates according to
+# the click on specific position of the screen"""
+# def getMouseClickCoordinate(x, y):
+#     print(x, y)
+#
+# turtle.onscreenclick(getMouseClickCoordinate)
+
+"""variable to take and store the answer"""
+answerState = screen.textinput(title="Guess the state", prompt="What's the name of the another state?")
+
+turtle.mainloop()
