@@ -109,13 +109,33 @@
 #####
 
 """India's states game"""
+# ------------------------------------------------
+"""imported turtle module"""
 import turtle
 
 """imported Screen class from the turtle module"""
 from turtle import Screen
 
+"""imported pandas module"""
+import pandas
+# ------------------------------------------------
+
+
+# ------------------------------------------------
+"""constants"""
+ALIGNMENT = "center"
+FONT = ("Arial", 10, "bold")
+# ------------------------------------------------
+
+
+# ------------------------------------------------
 """image"""
 image = "Indian_Political_Map_March_2022.gif"
+
+"""created tim object"""
+tim = turtle.Turtle()
+tim.penup()
+tim.hideturtle()
 
 """created screen object"""
 screen = Screen()
@@ -125,15 +145,73 @@ screen.addshape(image)
 
 """turtle takes the shape of the image"""
 turtle.shape(image)
+# ------------------------------------------------
 
+
+# ------------------------------------------------
+# """function for converting the initials of the answer to uppercase"""
+# def toPascalCase(word):
+#     words = word.split(" ")
+#     words = [w.capitalize() for w in words]
+#
+#     newWord = " ".join(words)
+#
+#     return newWord
+#
+# newAnswer = toPascalCase(answerState)
+# ------------------------------------------------
+
+
+# ------------------------------------------------
+"""variable to store the state's data"""
+data = pandas.read_csv("indianStates.csv")
+
+"""list to store the state's name"""
+statesList = data.state.to_list()
+
+"""list to store the x position"""
+xPosList = data.x.to_list()
+
+"""list to store the y position"""
+yPosList = data.y.to_list()
+# ------------------------------------------------
+
+
+# ------------------------------------------------
+"""list to store the states which has been answered"""
+answeredStates = []
+
+while len(answeredStates) < 28:
+
+    """variable to take and store the answer"""
+    answerState = screen.textinput(title=f"Guess the state:  {len(answeredStates)}/{len(statesList)} states correct", prompt="What's the name of the another state?").title()
+
+    if answerState in statesList and answerState not in answeredStates:
+        answeredStates.append(answerState)
+        index = statesList.index(answerState)
+        xPos = xPosList[index]
+        yPos = yPosList[index]
+        tim.goto(xPos, yPos)
+        tim.write(answerState, align=ALIGNMENT, font=FONT)
+
+    elif answerState == "Exit":
+        notAnsweredState = [state for state in statesList if state not in answeredStates]
+        data2 = pandas.DataFrame(notAnsweredState)
+        data2.to_csv("MissingStates.csv")
+
+        break
+
+"""screen will exit on click"""
+screen.exitonclick()
+# ------------------------------------------------
+
+
+# ------------------------------------------------
 # """function to find the coordinates according to
 # the click on specific position of the screen"""
 # def getMouseClickCoordinate(x, y):
 #     print(x, y)
 #
 # turtle.onscreenclick(getMouseClickCoordinate)
-
-"""variable to take and store the answer"""
-answerState = screen.textinput(title="Guess the state", prompt="What's the name of the another state?")
-
-turtle.mainloop()
+# turtle.mainloop()
+# ------------------------------------------------
